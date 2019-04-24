@@ -1,45 +1,43 @@
-const notes = [{
-    title: 'My Next Trip',
-    body: 'My next trip should be to Michigan'
-}, {
-    title: 'Habbits To Work On',
-    body: 'Exercise. Eating better'
-}, {
-    title: 'Office Modification',
-    body: 'Get a new chair'
-}]
+let notes = getSavedNotes()
 
 const filters = {
     searchText: ''
 }
 
-const renderNotes = (notes, filters) => {
-    const filteredNotes = notes.filter((note) => {
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
-
-    document.querySelector('#notes').innerHTML = ''
-
-    filteredNotes.forEach((note) => {
-        const noteEl = document.createElement('p')
-        noteEl.textContent = note.title
-        document.querySelector('#notes').appendChild(noteEl)
-    })
-}
-
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', (e) => {
-    e.target.textContent = 'The Button Was Clicked!'
-})
+    const id = uuidv4()
+    const timestamp = moment().valueOf()
 
-document.querySelector('#remove-all').addEventListener('click', (e) => {
-    document.querySelectorAll('.note').forEach((note) => {
-        note.remove()
+    notes.push({
+        id: id,
+        title: '',
+        body: '',
+        createdAt: timestamp,
+        editedAt: timestamp
     })
+    saveNotes(notes)
+    location.assign(`/edit.html#${id}`)
 })
 
 document.querySelector('#search-text').addEventListener('input', (e) => {
     filters.searchText = e.target.value
     renderNotes(notes, filters)
 })
+
+document.querySelector("#filter-by").addEventListener('change', (e) => {
+    console.log(e.target.value)
+})
+
+window.addEventListener('storage', (e) => {
+    if (e.key === 'notes') {
+notes = JSON.parse(e.newValue)
+renderNotes(notes, filters)
+    }
+})
+
+const birthday = moment()
+birthday.year(1979).month(3).date(1)
+
+console.log(birthday.format('MMM D, YYYY'))

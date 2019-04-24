@@ -5,22 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Notes App</title>
 </head>
 
 <body>
     <h1>NOTES APP</h1>
     <h2>Take notes and never forget</h2>
-    <input id='search-text' type = 'text' placeholder="Filter Notes">
-    <div id='notes'> 
-
-    </div>
+    <input id='search-text' type='text' placeholder="Filter Notes">
+    <select id="filter-by">
+        <option value="byEdited">Sort by Last Edited</option>
+        <option value="byCreated">Sort by Recently Created</option>
+        <option value="alphabetical">Sort Alphabetically</option>
+    </select>
+    <div id='notes'></div>
     <button id='create-note'>Create Note</button>
-    <button id='remove-all'>Remove All Notes</button>
-
-
-
-
+    <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="notes-functions.js"></script>
     <script src="notes-app.js"></script>
 </body>
 
